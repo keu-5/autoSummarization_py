@@ -1,13 +1,10 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 import openai
-openai.organization = "org-YupUjIebSYVcUh0Gu3tqBieD"
-openai.api_key = "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"
-
-#本番用: TWqJ5P8oaUM
-#テスト用: q62z-Iemp5U
+openai.organization = "ここにOrganization IDを入力"
+openai.api_key = "ここにAPIキーを入力"
 
 #動画のIDを渡す
-transcript_list = YouTubeTranscriptApi.list_transcripts("RGYTGmUwseE")
+transcript_list = YouTubeTranscriptApi.list_transcripts("ここにYouTubeの動画のIDを入力")
 
 sentenceList = []
 
@@ -56,6 +53,7 @@ def Ask_ChatGPT(message):
     # 応答内容出力
     return response
 
+lastLesult = []
 
 #要約第一段階
 for i in range(len(result) - 1):
@@ -66,4 +64,16 @@ for i in range(len(result) - 1):
     res = Ask_ChatGPT(message)
     # 出力
     print(res)
+    lastLesult.append(res)
+
+#txtファイルに書き込み
+f = open(f'./{id}.txt', 'a')
+
+for i in range(len(lastLesult)):
+    print(lastLesult[i])
+    f.writelines(lastLesult[i])
+    print("--------------------------------------------------------")
+    f.writelines("----------------------------------------------------------\n")
+
+f.close()
 
