@@ -3,8 +3,10 @@ import openai
 openai.organization = "ここにOrganization IDを入力"
 openai.api_key = "ここにAPIキーを入力"
 
+id = "ここにYouTubeの動画のIDを入力"
+
 #動画のIDを渡す
-transcript_list = YouTubeTranscriptApi.list_transcripts("ここにYouTubeの動画のIDを入力")
+transcript_list = YouTubeTranscriptApi.list_transcripts(id)
 
 sentenceList = []
 
